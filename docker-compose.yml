@@ -1,0 +1,54 @@
+version: "3"
+services:
+  db:
+    container_name: "db"
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=mountain
+    ports:
+      - "3306:3306"
+  
+  # nginx:
+  #   depends_on:
+  #     - api
+  #     - client
+  #   restart: always
+  #   build:
+  #     dockerfile: Dockerfile.dev
+  #     context: ./nginx
+  #   ports:
+  #     - '3050:80'
+
+  api:
+    container_name: "api"
+    depends_on:
+      - db
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    ports:
+      - "3000:3000"
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_PORT=3306
+
+  client:
+    depends_on:
+        - api
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - /home/node/app/node_modules
+      - ./client:/home/node/app
+  
