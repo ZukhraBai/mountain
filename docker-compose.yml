@@ -10,17 +10,6 @@ services:
       - MYSQL_DATABASE=mountain
     ports:
       - "3306:3306"
-  
-  # nginx:
-  #   depends_on:
-  #     - api
-  #     - client
-  #   restart: always
-  #   build:
-  #     dockerfile: Dockerfile.dev
-  #     context: ./nginx
-  #   ports:
-  #     - '3050:80'
 
   api:
     container_name: "api"
