@@ -2,6 +2,8 @@
 #### Video Demo:  <URL 'https://youtu.be/iRB-UYBmmSw'>
 #### Description:
 
+The application allows you to book a guided tour of the Caucasus Mountains.
+
 Project include 2 main folders: client and server.
 
 I desided to select javascript framework Vue for client because it simplifies and speeds up development in Javascript.
@@ -65,3 +67,12 @@ I desided to select javascript framework Vue for client because it simplifies an
 
 ### docker-compose.yml
 config file for Docker Compose. It allows to deploy, combine, and configure multiple docker containers at the same time. The Docker "rule" is to outsource every single process to its own Docker container.
+
+
+## Running the app
+To run the project you need to have docker and docker compose installed.
+
+```bash
+$ docker compose build
+$ docker compose up
+```
